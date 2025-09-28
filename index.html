@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Point.AI</title>
+  <style>
+    :root{
+      --youtube:#FF0000;
+      --google:#4285F4;
+      --udemy:#7B1FA2;
+      --chatgpt:#808080;
+      --perplexity:#000000;
+      --spotify:#1DB954;
+      --instagram:#E1306C;
+      --midjourney:#5a67d8;
+      --huggingface:#ffcc00;
+      --claude:#1c1c1c;
+      --bg:#0f1724;
+      --card:#101624;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(135deg, #0b1220 0%, #1a2136 100%);
+      color:#e6eef8;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      overflow-x:hidden;
+    }
+    .container{
+      width:100%;
+      max-width:1100px;
+      background:rgba(255,255,255,0.03);
+      border-radius:18px;
+      padding:32px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+      backdrop-filter:blur(10px);
+      animation:fadeIn 1s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(20px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+    header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:28px;
+    }
+    h1{
+      font-size:32px;
+      margin:0 0 20px 0;
+      font-weight:700;
+      background:linear-gradient(90deg,#00c6ff,#0072ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:glow 2s infinite alternate;
+    }
+    @keyframes glow{
+      from{text-shadow:0 0 8px #0072ff55;}
+      to{text-shadow:0 0 18px #00c6ff99;}
+    }
+    .search-box{
+      width:100%;
+      max-width:500px;
+      margin-bottom:20px;
+    }
+    .search-box input{
+      width:100%;
+      padding:12px 16px;
+      border-radius:10px;
+      border:none;
+      outline:none;
+      font-size:16px;
+      background:#1a2336;
+      color:#fff;
+      box-shadow:0 4px 10px rgba(0,0,0,0.4);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+      gap:20px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:transform .2s ease, box-shadow .2s ease;
+      cursor:pointer;
+      animation:popUp .6s ease;
+    }
+    @keyframes popUp{
+      from{opacity:0; transform:scale(.8)}
+      to{opacity:1; transform:scale(1)}
+    }
+    .card:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 12px 28px rgba(0,0,0,0.5);
+    }
+    .card h3{
+      margin:12px 0 0;
+      font-size:18px;
+      font-weight:600;
+    }
+    .logo{
+      width:48px;
+      height:48px;
+      object-fit:contain;
+    }
+    .click-sound{display:none;}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <h1>Fast Track</h1>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search apps...">
+      </div>
+    </header>
+
+    <section class="grid" id="appsGrid">
+      <div class="card" data-name="youtube" onclick="openLink('https://www.youtube.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube">
+        <h3 style="color:var(--youtube)">YouTube</h3>
+      </div>
+      <div class="card" data-name="google" onclick="openLink('https://www.google.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <h3 style="color:var(--google)">Google</h3>
+      </div>
+      <div class="card" data-name="udemy" onclick="openLink('https://www.udemy.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Udemy_logo.svg" alt="Udemy">
+        <h3 style="color:var(--udemy)">Udemy</h3>
+      </div>
+      <div class="card" data-name="chatgpt" onclick="openLink('https://chat.openai.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+        <h3 style="color:var(--chatgpt)">ChatGPT</h3>
+      </div>
+      <div class="card" data-name="perplexity" onclick="openLink('https://www.perplexity.ai/')">
+        <img class="logo" src="https://seeklogo.com/images/P/perplexity-ai-logo-169D7D67FC-seeklogo.com.png" alt="Perplexity AI">
+        <h3 style="color:var(--perplexity)">Perplexity AI</h3>
+      </div>
+      <div class="card" data-name="spotify" onclick="openLink('https://www.spotify.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify">
+        <h3 style="color:var(--spotify)">Spotify</h3>
+      </div>
+      <div class="card" data-name="instagram" onclick="openLink('https://www.instagram.com/')">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        <h3 style="color:var(--instagram)">Instagram</h3>
+      </div>
+      <div class="card" data-name="midjourney" onclick="openLink('https://www.midjourney.com/')">
+        <img class="logo" src="https://seeklogo.com/images/M/midjourney-logo-9AD62E9F5E-seeklogo.com.png" alt="MidJourney">
+        <h3 style="color:var(--midjourney)">MidJourney</h3>
+      </div>
+      <div class="card" data-name="hugging face" onclick="openLink('https://huggingface.co/')">
+        <img class="logo" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face">
+        <h3 style="color:var(--huggingface)">Hugging Face</h3>
+      </div>
+      <div class="card" data-name="claude ai" onclick="openLink('https://claude.ai/')">
+        <img class="logo" src="https://cdn.brandfetch.io/claude.ai/logo" alt="Claude AI">
+        <h3 style="color:var(--claude)">Claude AI</h3>
+      </div>
+    </section>
+  </div>
+
+  <audio id="clickSound" class="click-sound" preload="auto">
+    <source src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" type="audio/ogg">
+  </audio>
+
+  <script>
+    const clickSound = document.getElementById('clickSound');
+    function openLink(url){
+      clickSound.currentTime = 0;
+      clickSound.play();
+      window.open(url,'_blank');
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        if(name.includes(query)){
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
